@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	errorRetry = fmt.Errorf("retry")
+	ErrorRetry = fmt.Errorf("retry")
 )
 
 func init() {
@@ -153,7 +153,7 @@ func (am *InnerAccessModel) request(now time.Time) (err error) {
 			}
 		}
 
-		err = errorRetry
+		err = ErrorRetry
 	}
 
 	am.mutex.Unlock()
@@ -207,7 +207,7 @@ func (am *AccessModel) Request() error {
 		}
 
 		err = am.inner.request(now)
-		if err == errorRetry {
+		if err == ErrorRetry {
 			continue
 		}
 
