@@ -1,6 +1,7 @@
 package accessmodel
 
 import (
+	"context"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
@@ -213,6 +214,12 @@ func (am *AccessModel) Request() error {
 
 		return err
 	}
+}
+
+func (am *AccessModel) NewStatistic(ctx context.Context) *Statistic {
+	stat := NewStatistic(am.saveXml)
+	stat.AutoSave(ctx)
+	return stat
 }
 
 func (am *AccessModel) loadInnerAccessModel(now time.Time) (*InnerAccessModel, error) {
